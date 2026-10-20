@@ -10,7 +10,7 @@ const bufferSize = 256 * 1024;
 const startThreshold = 50 * 1024 * 1024;
 const maxChunkLen = 64 * 1024;
 const flushTime = 4;
-let concurrency = 4;
+const concurrency = 4;
 const urlParamCacheLimit = 20;
 const proxyStrategyOrder = ['socks', 'http', 'https'];
 const aiProxyip = 'kr.william.us.ci';
@@ -605,7 +605,7 @@ export default {
         if (request.headers.get('Upgrade') === 'websocket') {
             const {0: clientSocket, 1: webSocket} = new WebSocketPair();
             // @ts-ignore
-            webSocket.accept({allowHalfOpen: true}), webSocket.binaryType = "arraybuffer";
+            webSocket.accept(), webSocket.binaryType = "arraybuffer";
             handleWebSocketConn(webSocket, request);
             return new Response(null, {status: 101, webSocket: clientSocket});
         }
